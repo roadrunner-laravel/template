@@ -1,0 +1,16 @@
+/.*/
+!/.github/
+
+/runtime/
+/vendor/
+
+/.env
+
+# Logs and binaries
+/*.log
+/*.exe
+/rr
+/dolt
+/protoc
+/protoc-gen-php-grpc
+/temporal
