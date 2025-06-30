@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<dload xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="vendor/internal/dload/dload.xsd"
+       temp-dir="./runtime"
+>
+    <actions>
+        <download software="rr" extract-path="bin" />
+        <download software="dolt" extract-path="bin" />
+    </actions>
+</dload>

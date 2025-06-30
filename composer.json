@@ -46,7 +46,8 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "dload get --no-interaction -v || \"echo can't dload binaries\""
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -56,9 +57,10 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
-        "get:rr": "dload get rr",
-        "get:temporal": "dload get temporal",
-        "get:protoc": "dload get protoc protoc-gen-php-grpc",
+        "dev": [
+            "bin/rr serve -c \".rr-dev.yaml\""
+        ],
+        "get:binaries": "dload get",
         "cs:check": "php-cs-fixer fix --dry-run",
         "cs:fix": "php-cs-fixer fix",
         "test": "phpunit --color=always --testdox",

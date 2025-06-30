@@ -1,0 +1,31 @@
+version: '3'
+rpc:
+  listen: 'tcp://127.0.0.1:6001'
+
+server:
+  command: 'php vendor/bin/rr-worker start'
+
+http:
+  address: 0.0.0.0:8080
+  access_logs: true
+  middleware: [ "static", "headers", "gzip" ]
+  pool:
+    #max_jobs: 64 # feel free to change this
+    supervisor:
+      # Maximal worker memory usage in megabytes (soft limit). Zero means no limit.
+      max_worker_memory: 250
+
+      # Maximal job lifetime (hard limit). Zero means no limit.
+      exec_ttl: 60s
+  headers:
+    response:
+      X-Powered-By: "RoadRunner"
+  static:
+    dir: "public"
+    forbid: [ ".php" ]
+
+  # Read https://docs.roadrunner.dev/docs/http/http#https to enable HTTPS
+
+logs:
+  level: warn
+  mode: production

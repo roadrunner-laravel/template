@@ -1,0 +1,30 @@
+version: '3'
+rpc:
+  listen: 'tcp://127.0.0.1:6001'
+
+server:
+  command: 'php vendor/bin/rr-worker start'
+
+service:
+  dolt:
+    service_name_in_log: true
+    timeout_stop_sec: 1
+    remain_after_exit: true
+    restart_sec: 1
+    command: "bin/dolt sql-server --config dolt.yaml"
+
+http:
+  address: 0.0.0.0:8080
+  middleware: [ "static", "headers", "gzip" ]
+  pool:
+    debug: true
+  headers:
+    response:
+      X-Powered-By: "RoadRunner"
+  static:
+    dir: "public"
+    forbid: [ ".php" ]
+
+logs:
+  level: info
+  mode: development
