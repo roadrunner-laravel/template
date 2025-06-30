@@ -1,19 +1,11 @@
-* text=auto
+* text=auto eol=lf
 
-.github                export-ignore
-.phive                 export-ignore
-.*                     export-ignore
-*.dist                 export-ignore
-*.yaml                 export-ignore
-*.xml                  export-ignore
-composer.lock          export-ignore
-composer-require-*     export-ignore
-Makefile               export-ignore
-Dockerfile             export-ignore
-infection.*            export-ignore
-tests                  export-ignore
-docs                   export-ignore
-resources/mock         export-ignore
+*.blade.php diff=html
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+*.php diff=php
 
-*.http binary
-*.gpg binary
+/.github export-ignore
+CHANGELOG.md export-ignore
+.styleci.yml export-ignore
