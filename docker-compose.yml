@@ -1,0 +1,37 @@
+networks:
+  app-network:
+
+
+services:
+  app:
+    image: laravel-rr-template
+    build:
+      context: .
+      dockerfile: ./docker/local/Dockerfile
+    restart: always
+    depends_on:
+      - database
+    volumes:
+      - ./:/var/www/html/app
+    ports:
+      - "${APP_HTTP}:8080"
+    networks:
+      - app-network
+    entrypoint: ["/bin/sh", "-c", "chmod +x ./docker/local/entrypoint.sh && sh ./docker/local/entrypoint.sh"]
+
+  database:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      MYSQL_DATABASE: template
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+  buggregator:
+    image: ghcr.io/buggregator/server:latest
+    restart: always
+    ports:
+      - "${BUGGREGATOR_HTTP}:8000"

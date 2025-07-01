@@ -5,6 +5,15 @@ rpc:
 server:
   command: 'php vendor/bin/rr-worker start'
 
+# Uncomment to work without docker
+#service:
+#  dolt:
+#    service_name_in_log: true
+#    timeout_stop_sec: 1
+#    remain_after_exit: true
+#    restart_sec: 1
+#    command: "bin/dolt sql-server --config dolt.yaml"
+
 http:
   address: 0.0.0.0:8080
   access_logs: true
@@ -27,5 +36,7 @@ http:
   # Read https://docs.roadrunner.dev/docs/http/http#https to enable HTTPS
 
 logs:
-  level: warn
-  mode: production
+  output: stdout
+  encoding: console
+  level: ${RR_LOG_LEVEL:-debug}
+  mode: ${RR_LOG_MODE:-development}
