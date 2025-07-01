@@ -15,6 +15,10 @@ if [ ! -f ./.rr.yaml ]; then
     cp .rr.yaml.example .rr.yaml
 fi
 
+if [ ! -f ./.env ]; then
+    cp .env.example .env
+fi
+
 
 # Генерируем новый ключ приложения
 php artisan key:generate
