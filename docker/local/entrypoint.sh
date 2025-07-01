@@ -7,8 +7,7 @@ composer install
 
 # Устанавливаем Roadrunner
 if [ ! -f ./rr ]; then
-    ./vendor/bin/rr get-binary
-    chmod +x /var/www/html/app/rr
+    ./vendor/bin/dload get
 fi
 
 if [ ! -f ./.rr.yaml ]; then
@@ -30,7 +29,7 @@ php artisan migrate
 #php artisan serve --port=8001 --host=0.0.0.0
 
 # Запускаем grpc Roadrunner
-./rr serve -c .rr.yaml
+./bin/rr serve -c .rr.yaml
 
 # Сообщение об успешном завершении
 echo "Setup completed successfully!"
