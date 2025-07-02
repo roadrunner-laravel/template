@@ -8,7 +8,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/local/Dockerfile
-    restart: always
+    restart: on-failure
     depends_on:
       - database
     volumes:
@@ -21,7 +21,7 @@ services:
 
   database:
     image: mysql:8.0
-    restart: always
+    restart: on-failure
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
       MYSQL_DATABASE: template
@@ -32,6 +32,6 @@ services:
 
   buggregator:
     image: ghcr.io/buggregator/server:latest
-    restart: always
+    restart: on-failure
     ports:
       - "${BUGGREGATOR_HTTP}:8000"
