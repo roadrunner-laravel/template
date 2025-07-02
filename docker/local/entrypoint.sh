@@ -6,7 +6,7 @@ set -e  # Останавливаем скрипт при ошибке
 composer install
 
 # Устанавливаем Roadrunner
-if [ ! -f ./rr ]; then
+if [ ! -f ./bin/rr ]; then
     ./vendor/bin/dload get
 fi
 
@@ -24,9 +24,6 @@ php artisan key:generate
 
 # Запускаем миграции
 php artisan migrate
-
-# Запускаем http сервер
-#php artisan serve --port=8001 --host=0.0.0.0
 
 # Запускаем grpc Roadrunner
 ./bin/rr serve -c .rr.yaml
