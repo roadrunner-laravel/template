@@ -12,9 +12,7 @@ RUN apt update && apt-get install -y \
     libbz2-dev  \
     libmcrypt-dev  \
     zlib1g-dev  \
-    libpng-dev  \
     libxml2-dev  \
-    libjpeg-dev \
     libicu-dev \
     libfreetype6-dev \
     libcurl4-openssl-dev \
@@ -53,5 +51,3 @@ RUN add-apt-repository ppa:ondrej/php && \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www/html/app
-
-ENTRYPOINT ["/opt/one2work/entrypoint.sh"]
