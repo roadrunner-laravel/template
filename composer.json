@@ -50,12 +50,12 @@
             "dload get --no-interaction -v || \"echo can't dload binaries\""
         ],
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php -r \"file_exists('.rr.yaml') || copy('.rr.yaml.example', '.rr.yaml');\""
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi",
-            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
-            "@php artisan migrate --graceful --ansi"
+            "@php -r \"file_exists('bin') || exec('./vendor/bin/dload get') ;\""
         ],
         "dev": [
             "bin/rr serve -c \".rr-dev.yaml\""

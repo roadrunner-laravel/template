@@ -1,32 +1,5 @@
 #!/bin/bash
 
-set -e  # Останавливаем скрипт при ошибке
+set -e
 
-# Устанавливаем зависимости
-composer install
-
-# Устанавливаем Roadrunner
-if [ ! -f ./bin/rr ]; then
-    ./vendor/bin/dload get
-fi
-
-if [ ! -f ./.rr.yaml ]; then
-    cp .rr.yaml.example .rr.yaml
-fi
-
-if [ ! -f ./.env ]; then
-    cp .env.example .env
-fi
-
-
-# Генерируем новый ключ приложения
-php artisan key:generate
-
-# Запускаем миграции
-php artisan migrate
-
-# Запускаем grpc Roadrunner
 ./bin/rr serve -c .rr.yaml
-
-# Сообщение об успешном завершении
-echo "Setup completed successfully!"
