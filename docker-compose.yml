@@ -7,8 +7,10 @@ services:
     image: laravel-rr-template
     build:
       context: .
-      dockerfile: ./docker/local/Dockerfile
+      dockerfile: docker/Dockerfile
     restart: on-failure
+    env_file:
+      - ./docker/configs/.env.docker
     depends_on:
       - database
     volumes:
@@ -17,7 +19,7 @@ services:
       - "${APP_HTTP}:8080"
     networks:
       - app-network
-    entrypoint: ["/bin/sh", "-c", "chmod +x ./docker/local/entrypoint.sh && sh ./docker/local/entrypoint.sh"]
+    entrypoint: ["/bin/sh", "-c", "chmod +x ./docker/entrypoint.sh && sh ./docker/entrypoint.sh"]
 
   database:
     image: mysql:8.0
@@ -26,7 +28,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
       MYSQL_DATABASE: template
     ports:
-      - "3306:3306"
+      - "${MYSQL_PORT}:3306"
     networks:
       - app-network
 
