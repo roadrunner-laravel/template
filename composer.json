@@ -58,9 +58,9 @@
             "@php -r \"file_exists('bin') || exec('./vendor/bin/dload get') ;\""
         ],
         "dev": [
-            "bin/rr serve -c \".rr-dev.yaml\""
+            "bin/rr serve -c \".rr.yaml\""
         ],
-        "get:binaries": "dload get",
+        "get:binaries": "dload get --force",
         "cs:check": "php-cs-fixer fix --dry-run",
         "cs:fix": "php-cs-fixer fix",
         "test": "phpunit --color=always --testdox",
