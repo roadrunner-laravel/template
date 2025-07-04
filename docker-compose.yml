@@ -1,0 +1,39 @@
+networks:
+  app-network:
+
+
+services:
+  app:
+    image: laravel-rr-template
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: on-failure
+    env_file:
+      - ./docker/configs/.env.docker
+    depends_on:
+      - database
+    volumes:
+      - ./:/var/www/html/app
+    ports:
+      - "${APP_HTTP}:8080"
+    networks:
+      - app-network
+    entrypoint: ["/bin/sh", "-c", "chmod +x ./docker/entrypoint.sh && sh ./docker/entrypoint.sh"]
+
+  database:
+    image: mysql:8.0
+    restart: on-failure
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      MYSQL_DATABASE: template
+    ports:
+      - "${MYSQL_PORT}:3306"
+    networks:
+      - app-network
+
+  buggregator:
+    image: ghcr.io/buggregator/server:latest
+    restart: on-failure
+    ports:
+      - "${BUGGREGATOR_HTTP}:8000"

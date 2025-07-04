@@ -30,3 +30,4 @@ yarn-error.log
 /protoc-gen-php-grpc
 /temporal
 /bin
+.rr.yaml
