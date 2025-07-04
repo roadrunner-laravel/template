@@ -2,8 +2,6 @@ FROM ubuntu:24.04
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-ENV UID=1001
-ENV GID=1001
 ENV WORKDIR=/var/www/html/app
 ENV PHP_VERSION="8.4"
 
@@ -50,4 +48,4 @@ RUN add-apt-repository ppa:ondrej/php && \
     php${PHP_VERSION}-redis \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /var/www/html/app
+WORKDIR ${WORKDIR}
